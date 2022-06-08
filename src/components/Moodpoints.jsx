@@ -3,12 +3,12 @@ import PointDisplay from './PointDisplay'
 
 class Moodpoints extends Component {
     // manage state to allow for user interactions
-    // // === class field declaration for initial state  === //
+    // // === CLASS FIELD DECLARATION for initial state  === //
     state = {
         points: 4
     }
 
-    // // === constructor way of defining initial state: === //
+    // // === CONSTRUCTOR way of defining initial state: === //
     // constructor() {
     //     // invoke super FIRST
     //     super()
@@ -19,22 +19,26 @@ class Moodpoints extends Component {
     //     }
     //     // run code if needed
     //     console.log(this, 'value of this ^')
+    //     // manually bind this when we don't use arrow functions
+    //     this.handleIncreaseMood = this.handleIncreaseMood.bind(this)
     // }
+
     // // === EVENT HANDLERS === //
     // create a method to set state
     handleIncreaseMood = () => {
-        console.log("button click")
-        // when passing a callback to setState, whatever is returned is merged with the state
+        // // === BAD !! WILL OFTEN ERROR !! BAD ===
+        // this.state.points = this.state.points + 1
+        // console.log("button click")
         // give setState parameters for prev and current state values
         this.setState((previousState, currentState) => {
+            // when passing a callback to setState, whatever is returned is merged with the state
             return {
                 points: previousState.points + 1
             }
         })
-        // // === BAD !! WILL OFTEN ERROR !! BAD ===
-        // this.state.points = this.state.points + 1
-        console.log("points increased")
+        // console.log("points increased")
     }
+ 
     render() {
         return(
             <>
