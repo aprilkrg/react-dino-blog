@@ -38,6 +38,23 @@ class Moodpoints extends Component {
         })
         // console.log("points increased")
     }
+    handleSetToTen = () => {
+        // when you don't care about previous value of state, you don't need to include it as a param
+        this.setState({ points: 10})
+    }
+    handleSetToZero = () => {
+        // when you don't care about previous value of state, you don't need to include it as a param
+        this.setState({ points: 0})
+    }
+
+    handleDecreaseMood = () => {
+        this.setState((previousState, currentState) => {
+            // when passing a callback to setState, whatever is returned is merged with the state
+            return {
+                points: previousState.points - 1
+            }
+        })
+    }
  
     render() {
         return(
@@ -50,6 +67,21 @@ class Moodpoints extends Component {
                     onClick={this.handleIncreaseMood}
                 >
                     🌈
+                </button>
+                <button 
+                    onClick={this.handleSetToTen}
+                >
+                    🔟
+                </button>
+                <button 
+                    onClick={this.handleSetToZero}
+                >
+                    ☔️
+                </button>
+                <button 
+                    onClick={this.handleDecreaseMood}
+                >
+                    🌩
                 </button>
             </>
         )
