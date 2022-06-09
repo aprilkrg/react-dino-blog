@@ -8,9 +8,12 @@ class Post extends Component {
             <>
                 <h1>{this.props.post.title}</h1>
                 <h3>{this.props.post.author}</h3>
-                <p>{this.props.appState.body}</p>
+                <p>{this.props.post.body}</p>
                 {this.props.post.comments.map((item,index) => (
-                    <Comment key={index} message={item} />
+                    <Comment 
+                        key={index} 
+                        message={item} 
+                    />
                 ))}
                 <button 
                     onClick={this.props.changeBody}
