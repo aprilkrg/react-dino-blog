@@ -4,7 +4,9 @@ class Comment extends Component {
     render() {
         return (
             <>
-                <p>{this.props.message}</p>
+                <li
+                    style={{listStyleType: "none"}}
+                >{this.props.message}</li>
             </>
         )
     }

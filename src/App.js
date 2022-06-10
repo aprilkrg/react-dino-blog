@@ -1,6 +1,7 @@
 import "./App.css";
-import Post from "./Post.jsx";
 import React, { Component } from "react";
+import Post from "./components/Post";
+import DinoForm from "./components/DinoForm";
 
 // imitation data from db
 const posts = [
@@ -27,7 +28,7 @@ const posts = [
   ]
 
 class App extends Component {
-    // class field declaration > constreuctor
+    // class field declaration 
     state = {
         title: "",
         author: "",
@@ -36,18 +37,6 @@ class App extends Component {
         input: ""
     }
     // // === EVENT HANDLERS === //
-    // create a function that changes the body of state
-    changeBody = () => {
-        // smallest possible step: console log
-        // console.log("click")
-        // capturing the user input and save to variable
-        const userInput = prompt("What should the current body be?")
-    
-        // console.log(userInput, 'input from user')
-        this.setState({
-            body: userInput
-        })
-    }
     // handle form submission
     handleSubmit = (e) => {
         e.preventDefault()
@@ -72,65 +61,26 @@ class App extends Component {
         this.setState(updatedInput)
     }
     render() {
-        // const post = {
-        //     title: "Dinosaurs are awesome",
-        //     author: "Stealthy Stegosaurus",
-        //     body: "Check out this body property!",
-        //     comments: ["First!", "Great post", "Hire this author now!"],
-        // };
         const postComponents = posts.map((post, index) => {
             return(
                 <Post
                     post={post}
-                    key={index}
-                    changeBody={this.changeBody}
+                    key={`post-${index}`}
                 />
             )
         })
         return (
             <div className="App">
-                {postComponents}
-                {/* <Post
-                    // pass the Post component the post object
-                    // post={post}
-                    // pass the function as a prop
-                    changeBody={this.changeBody}
-                    // pass state to component
-                    appState={this.state}
-                /> */}
-                <p>{this.state.input}</p>
-                {/* make a controlled form */}
-                <form
-                    onSubmit={this.handleSubmit}
-                >
-                    <label htmlFor="post-title">Title:</label>
-                    <input
-                        type="text"
-                        onChange={this.handleTextChange}
-                        name="title"
-                        id="post-title"
-                        value={this.state.title}
-                        />
-                    <label htmlFor="post-author">Author:</label>
-                    <input
-                        type="text"
-                        onChange={this.handleTextChange}
-                        name="author"
-                        id="post-author"
-                        value={this.state.author}
-                        />
-                    <label htmlFor="post-body">Body:</label>
-                    <input
-                        type="text"
-                        onChange={this.handleTextChange}
-                        name="body"
-                        id="post-body"
-                        value={this.state.body}
-                    />
-                    <input
-                        type="submit"
-                    />
-                </form>
+                <h1>Dino Blog</h1>
+                <p>Create A New Dinosaur!</p>
+                <div>{this.state.input}</div>
+                <DinoForm 
+                    handleSubmit={this.handleSubmit}
+                    handleTextChange={this.handleTextChange}
+                    state={this.state}
+                />
+                {postComponents.reverse()}
+
             </div>
         );
     }
